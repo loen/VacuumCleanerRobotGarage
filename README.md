@@ -3,7 +3,9 @@ VacuumCleanerRobotGarage is a project to create garage for my xiaomi vacuum clea
 It have ability to periodically open it's gates to allow vacuum cleaner performing cleanup,
 and it close automatically once cleaning is performed.
 
-## wirings
+## Wirings
+
+![Design](http:/https://raw.githubusercontent.com/loen/VacuumCleanerRobotGarage/master/design/VacuumCleanerRobotGarage.jpg)
 
 ## How to setup bluetooth connectivity on Raspberry Pi
 
