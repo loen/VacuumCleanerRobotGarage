@@ -5,7 +5,7 @@ and it close automatically once cleaning is performed.
 
 ## Wirings
 
-![Design](http:/https://raw.githubusercontent.com/loen/VacuumCleanerRobotGarage/master/design/VacuumCleanerRobotGarage.jpg)
+![Design](http:/https://raw.githubusercontent.com/loen/VacuumCleanerRobotGarage/master/designs/VacuumCleanerRobotGarage.jpg)
 
 ## How to setup bluetooth connectivity on Raspberry Pi
 
