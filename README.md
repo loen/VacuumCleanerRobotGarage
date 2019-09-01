@@ -38,3 +38,17 @@ after this you are able to send text message to VacuumCleanerRobotGarage device 
 ```
 $ echo "TEST-MSG" > /dev/rfcomm0
 ```
+
+
+## How to setup Opening gates at given time using cron on Raspberry Pi
+
+login to your raspberry and get this repo to your home folder, than execute crontab:
+
+```
+$ crontab -e
+```
+put specyfic line when you want the gates to be open (as an example gates will be open every day at 11:35)
+
+```
+35 11 * * * /home/pi//VacuumCleanerRobotGarage/PiScript/VacuumCleanerRobotGarage.sh
+```
