@@ -53,22 +53,6 @@ void loop() {
       myservo.writeMicroseconds(SERVO_DOWN);
       servoState = SERVO_DOWN;
       delay(500);
-      
     }
     
-
-    /*if(digitalRead(FOTO) == 0 && servoState == SERVO_UP){
-      while(digitalRead(FOTO) == 0){
-        delay(500);
-      }
-      fotoCount++;
-      if(fotoCount == 2){
-          delay(3000);
-          myservo.writeMicroseconds(SERVO_DOWN);
-          servoState = SERVO_DOWN;
-          delay(500);
-          fotoCount = 0;
-      }
-    }*/
-
 }
