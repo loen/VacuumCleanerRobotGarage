@@ -8,7 +8,6 @@ const int RX = 10;
 const int TX = 11;
 
 int servoState = SERVO_DOWN;
-int fotoCount = 0;
 
 Servo myservo;
 SoftwareSerial BTSerial(10, 11);
@@ -41,6 +40,24 @@ void loop() {
     }
 
     if(digitalRead(FOTO) == 0 && servoState == SERVO_UP){
+      Serial.println("Jestem tu");
+      while(digitalRead(FOTO) == 0){
+        Serial.println("0");
+        delay(500);
+      }
+      while(digitalRead(FOTO) == 1){
+        Serial.println("1");
+        delay(500);
+      }
+      delay(3000);
+      myservo.writeMicroseconds(SERVO_DOWN);
+      servoState = SERVO_DOWN;
+      delay(500);
+      
+    }
+    
+
+    /*if(digitalRead(FOTO) == 0 && servoState == SERVO_UP){
       while(digitalRead(FOTO) == 0){
         delay(500);
       }
@@ -52,6 +69,6 @@ void loop() {
           delay(500);
           fotoCount = 0;
       }
-    }
+    }*/
 
 }
