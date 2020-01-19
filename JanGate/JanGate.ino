@@ -40,13 +40,10 @@ void loop() {
     }
 
     if(digitalRead(FOTO) == 0 && servoState == SERVO_UP){
-      Serial.println("Jestem tu");
       while(digitalRead(FOTO) == 0){
-        Serial.println("0");
         delay(500);
       }
       while(digitalRead(FOTO) == 1){
-        Serial.println("1");
         delay(500);
       }
       delay(3000);
