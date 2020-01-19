@@ -8,6 +8,7 @@ const int RX = 10;
 const int TX = 11;
 
 int servoState = SERVO_DOWN;
+bool vacuumCleaning = false;
 
 Servo myservo;
 SoftwareSerial BTSerial(10, 11);
@@ -28,28 +29,40 @@ void loop() {
     if(BTSerial.available() > 0) {
       cmd = BTSerial.readString();
       cmd.trim();
-      Serial.println("napisalem");
+      Serial.println("received:");
       Serial.println(cmd);
       if(cmd == "OPEN"){
         if(servoState == SERVO_DOWN){
           myservo.writeMicroseconds(SERVO_UP);
           servoState = SERVO_UP;
+          vacuumCleaning = false;
+          delay(500);
+        }
+      } else if(cmd == "CLOSE"){
+        if(servoState == SERVO_UP){
+          myservo.writeMicroseconds(SERVO_DOWN);
+          servoState = SERVO_DOWN;
+          vacuumCleaning = false;
           delay(500);
         }
       }
     }
 
-    if(digitalRead(FOTO) == 0 && servoState == SERVO_UP){
-      while(digitalRead(FOTO) == 0){
-        delay(500);
+    if(servoState == SERVO_UP){
+      if(digitalRead(FOTO) == 1 && !vacuumCleaning){
+        Serial.println("vacuum is out");
+        vacuumCleaning = true;  
+        delay(20000);
       }
-      while(digitalRead(FOTO) == 1){
+      if(digitalRead(FOTO) == 0 && vacuumCleaning){
+        Serial.println("vacuum is back");
+        delay(10000);
+        myservo.writeMicroseconds(SERVO_DOWN);
+        servoState = SERVO_DOWN;
         delay(500);
+        vacuumCleaning = false;
       }
-      delay(3000);
-      myservo.writeMicroseconds(SERVO_DOWN);
-      servoState = SERVO_DOWN;
-      delay(500);
+      
     }
     
 }
