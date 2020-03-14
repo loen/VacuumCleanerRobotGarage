@@ -33,18 +33,16 @@ void loop() {
       Serial.println(cmd);
       if(cmd == "OPEN"){
         if(servoState == SERVO_DOWN){
-          myservo.writeMicroseconds(SERVO_UP);
+          openTheGate();
           servoState = SERVO_UP;
           vacuumCleaning = false;
           delay(500);
         }
       } else if(cmd == "CLOSE"){
-        if(servoState == SERVO_UP){
-          myservo.writeMicroseconds(SERVO_DOWN);
+          closeTheGate();
           servoState = SERVO_DOWN;
           vacuumCleaning = false;
           delay(500);
-        }
       }
     }
 
@@ -52,12 +50,12 @@ void loop() {
       if(digitalRead(FOTO) == 1 && !vacuumCleaning){
         Serial.println("vacuum is out");
         vacuumCleaning = true;  
-        delay(20000);
+        delay(30000);
       }
       if(digitalRead(FOTO) == 0 && vacuumCleaning){
         Serial.println("vacuum is back");
         delay(10000);
-        myservo.writeMicroseconds(SERVO_DOWN);
+        closeTheGate();
         servoState = SERVO_DOWN;
         delay(500);
         vacuumCleaning = false;
@@ -66,3 +64,24 @@ void loop() {
     }
     
 }
+
+void openTheGate(){
+    int servoState = SERVO_DOWN;
+    Serial.println(servoState);
+    while(servoState > SERVO_UP){
+      servoState = servoState - 100;
+      myservo.writeMicroseconds(servoState);
+      delay(300);
+    }    
+}
+
+void closeTheGate(){
+  int servoState = SERVO_UP;
+  Serial.println(servoState);
+  while(servoState < SERVO_DOWN){
+    servoState = servoState + 100;
+    myservo.writeMicroseconds(servoState);
+    delay(500);
+  }
+  myservo.writeMicroseconds(SERVO_DOWN);
+} 
